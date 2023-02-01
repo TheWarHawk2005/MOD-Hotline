@@ -48,10 +48,24 @@ input:focus {
 	padding: 10px;
 	background-color: inherit;
 	position:absolute;
-  left:0;
-  right:0;
-  margin-left:auto;
-  margin-right:auto;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+
+	display: none;
+	width:90vw;
+	height:90vh;
+}
+
+#advanced {
+	padding: 10px;
+	background-color: inherit;
+	position:absolute;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
 
 	display: none;
 	width:90vw;
