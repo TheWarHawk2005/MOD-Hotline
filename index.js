@@ -2,7 +2,9 @@
 // ============== //
 const storageMax = 50
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const version = '1.0.2'
 const checkInterval = 1000 // ms between each blob ping
+var blobID
 
 
 // == DOCUMENT AND TEXT HANDLER == //
@@ -11,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function () { // start scripts and
 	console.log("DOM Loaded")
 	applyTheme('dark')
 	handleCookieSetup()
+	checkMessages() // initial Blob ping
 	determineVersion()
 
-	setInterval(function () { // check messages loop
-		checkMessages()
+	setInterval(function () {
+		checkMessages()  // periodically check messages
 	}, checkInterval)
 })
 
@@ -68,12 +71,22 @@ function formatSelection(ele) {
 	}
 }
 
-const determineVersion = function() {
-	let href = window.location.href
-	if (href.includes('https://mod-hotline-testbuild.glitch.me')) {
-		document.getElementById('testbuildWarning').innerHTML = '[!] testbuild'
-		console.warn('Currently running testbuild. Navigate to mod-hotline.vercel.app for stable build.')
-	}
+const determineVersion = function() {// determine version and specs
+	let href = window.location.href 
+	let testbuild = href.includes('testbuild')
+
+	let ele = document.querySelectorAll('.versionDisplay')
+	ele.forEach(ele => {
+		ele.innerHTML = !testbuild ? `v${version}` : `⚠ [BETA]: v${version}`
+	})
+	ele = document.querySelectorAll('.locationHREFDisplay')
+	ele.forEach(ele => {
+		ele.innerHTML = href
+	})
+	ele = document.querySelectorAll('.JSONBlobDisplay')
+	ele.forEach(ele => {
+		ele.innerHTML = 'https://jsonblob.com/api/jsonblob/' + blobID
+	})
 }
 
 
