@@ -18,7 +18,7 @@ const applyTheme = function (theme) {
 		ruleForScroll.selectorText = '#messagesParent::-webkit-scrollbar-thumb'
 		ruleForScroll.style["background"] = '#' + themes[theme][1]
 	})
-	var secondary = document.querySelectorAll('#settings')
+	var secondary = document.querySelectorAll('.popup')
 	secondary.forEach(secondary => {
 		secondary.style.backgroundColor = '#' + themes[theme][1]
 	})
