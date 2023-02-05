@@ -10,6 +10,14 @@ input {
 	border-radius: 3px;
 }
 
+textarea {
+	font-size: 16px;
+	font-family: Georgia, serif;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+}
+
 button {
 	font-family: Georgia, serif;
 	font-size: 16px;
@@ -25,6 +33,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 input:focus {
 	font-size: 16px;
+}
+
+/* if mobile device max width 480px */
+@media only screen and (max-device-width: 480px) {
+	.mobile {
+		display: block;
+	}
+
+	.desktop {
+		display: none;
+	}
 }
 
 .message {
@@ -47,29 +66,31 @@ input:focus {
 #settings {
 	padding: 10px;
 	background-color: inherit;
-	position:absolute;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+  z-index: 1;
 
 	display: none;
-	width:90vw;
-	height:90vh;
+	width: 90vw;
+	height: 90vh;
 }
 
 #advanced {
 	padding: 10px;
 	background-color: inherit;
-	position:absolute;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+  z-index: 1;
 
 	display: none;
-	width:90vw;
-	height:90vh;
+	width: 90vw;
+	height: 90vh;
 }
 
 #messagesScroll * {
@@ -79,9 +100,10 @@ input:focus {
 
 #messagesParent {
 	font-family: inherit;
-	max-height: 60vh;
-	max-width: 80vh;
+	max-height: 80vh;
+	max-width: 80vw;
 	min-width: 50vw;
+  min-height: 50vh;
 	overflow-y: auto;
 	border-style: solid;
 	border-width: 1px;
@@ -104,8 +126,18 @@ input:focus {
 }
 
 #messageInputDiv {
-	min-width: 50vw;
-	max-width: 80vw;
+  height: 20vh;
+  max-height: 20vh;
+	width: calc(100vw - 40px);
+	padding: 10px;
+
+	vertical-align: bottom;
+}
+
+#leftBox {
+	padding: 10px;
+	min-width: 70vw;
+	position: relative;
 }
 
 #rightBox {
@@ -113,8 +145,18 @@ input:focus {
 }
 
 #textinput {
-	width: 100%;
+	width: calc(100% - 20px);
+	display: block;
 	margin-top: 10px;
+	overflow: hidden;
+	resize: both;
+	padding: 10px;
+
+}
+
+#textinput[contenteditable]:empty::before {
+	content: "new message";
+	color: gray;
 }
 
 #sendMessage {
@@ -123,5 +165,5 @@ input:focus {
 }
 
 .warning {
-	color:yellow;
+	color: yellow;
 }
