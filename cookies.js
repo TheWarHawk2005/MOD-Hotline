@@ -6,6 +6,7 @@ const handleCookieSetup = function () {
 	var notif = getCookie('notif')
 
 	document.getElementById('username').value = username
+	document.getElementById('usernamePreview').value = username // username preview
 	document.getElementById('blobID').value = blobID
 	document.getElementById(notif).checked = true
 	document.getElementById(theme).checked = true
