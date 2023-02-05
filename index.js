@@ -2,10 +2,9 @@
 // ============== //
 const storageMax = 50
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-const version = '1.0.2'
+const version = '1.0.4'
 const checkInterval = 1000 // ms between each blob ping
 var blobID
-
 
 // == DOCUMENT AND TEXT HANDLER == //
 // =============================== //
