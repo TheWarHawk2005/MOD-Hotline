@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="style.css">
+
+	<title>MOD Hotline</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="cookies.js"></script>
+	<script src="http.js"></script>
+	<script src="colors.js"></script>
+	<script src="index.js"></script>
+	
+
+</head>
+
+<body>
+	<!-- SETTINGS DIV: Hidden until toggled on-->
+	<div id="settings" class="popup">
+		<h3>General</h3>
+		<input id="username" placeholder="Name" value="">
+		<input id="blobID" placeholder="chat ID" value="" type="number" step="1">
+
+		<h3>Theme</h3>
+
+		<input id="dark" value="dark" name="theme" type="radio">
+		<label for="dark">Dark</label><br>
+		<input id="jungle" value="jungle" name="theme" type="radio">
+		<label for="jungle">Jungle</label><br>
+		<input id="laetare" value="laetare" name="theme" type="radio">
+		<label for="laetare">Laetare</label><br>
+		<input id="brimstone" value="brimstone" name="theme" type="radio">
+		<label for="brimstone">Brimstone</label><br>
+
+		<h3>Notifications</h3>
+		<input id="default" name="notifications" type="radio" value="default">
+		<label for="default">Default</label><br>
+		<input id="censor" name="notifications" type="radio" value="censor">
+		<label for="censor">Censored</label><br>
+		<input id="off" name="notifications" type="radio" value="off">
+		<label for="off">Off</label><br>
+
+		<input id="requestNotifications" type="button" onclick="requestNotifications()"
+			value="Request Notifications"><br>
+
+		<h3>Resources</h3>
+		<a href="https://github.com/TheWarHawk2005/MOD-Hotline/wiki">Wiki and Docs</a><br><br>
+		<input type="button" onclick="showhide('settings');showhide('advanced')" value="Advanced"><br>
+
+		<input id="closeSettings" type="button" onclick="showhide('settings')" value="Cancel">
+		<input id="saveCookies" type="button" onclick="saveCookies();showhide('settings')" value="Save">
+	</div>
+
+	<!--VERSION DIV: hidden until toggled on-->
+	<div id="advanced" class="popup">
+		<p style="font-size:small">
+			Running version: <span class="versionDisplay"></span><br>
+			Environment: <span class="locationHREFDisplay"></span><br>
+			JSONBlob raw: <span class="JSONBlobDisplay"></span><br>
+		</p>
+		<h3>Versions</h3>
+		<select id="versionSelect">
+		<optgroup label="Versions">
+			<option value="https://mod-hotline.vercel.app">[STABLE] MOD Hotline: latest stable environment</option>
+			<option value="https://mod-hotline-testbuild.glitch.me">[BETA] Test Build: unstable beta</option>
+		</optgroup>
+		<optgroup label="Old Versions (may have bugs/limited functionality">
+			<option value="https://mod-hotline.vercel.app/v1.0.1">MOD Hotline v1.0.1</option>
+			<option value="https://mod-hotline.vercel.app/v1.0.0">MOD Hotline v1.0.0: initial release</option>
+		</optgroup>
+		</select>
+		<input type="button" onclick="window.location.href=document.getElementById('versionSelect').value" value="Change version">
+		<p><a href="https://github.com/TheWarHawk2005/MOD-Hotline/wiki">Wiki and Docs</a></p><br>
+
+		<input type="button" onclick="downloadBackup()" value="Download Messages"><br><br>
+
+		<input id="closeAdvanced" type="button" onclick="showhide('advanced')" value="Close">
+	</div>
+
+
+
+	<div id="leftBox" style="float:left">
+		<div id="messagesParent">
+			<div id="messagesScroll">
+				<div id="messages">
+				</div>
+				<div id="scrollAnchor"></div>
+			</div>
+    </div>
+    
+	</div>
+
+	<div id="rightBox" style="float:left">
+		<div id="settingsPreview" class="desktop">
+			<input id="usernamePreview" placeholder="Name" value="" onchange="setCookie('username', this.value, 3650);document.getElementById('username').value=this.value">
+			<p id="version" class="versionDisplay"></p>
+
+		</div>
+    <div id="presetCodes" class="desktop">
+		<select id="chessCodes">
+			<option value="pushed a pawn">♟ pushed a pawn</option>
+			<option value="promoted a pawn">♟ promoted a pawn</option>
+			<option value="castled queenside">♟ castled queenside</option>
+			<option value="smothered mate">♟ smothered mate</option>
+		</select>
+		<input type="button" value="Append Chess Code"
+			onclick="appendCode(document.getElementById('chessCodes').value)">
+		<br>
+		<select id="beanCodes">
+			<option value="jelly beans">🥫 jelly beans</option>
+			<option value="pinto beans">🥫 pinto beans</option>
+			<option value="refried beans">🥫 refried beans</option>
+			<option value="kidney beans">🥫 kidney beans</option>
+			<option value="BEANS!">🥫 BEANS!</option>
+		</select>
+		<input type="button" value="Append Bean Code" onclick="appendCode(document.getElementById('beanCodes').value)">
+		<br><br>
+    </div>
+
+		<!--requires <BUTTON> elements for easier formatting-->
+		<button id="bold" type="button" onclick="new formatSelection(document.getElementById('textinput')).bold()"><b>B</b></button>
+		<button id="italicize" type="button" onclick="new formatSelection(document.getElementById('textinput')).italicize()"><i>I</i></button>
+		<button id="underline" type="button" onclick="new formatSelection(document.getElementById('textinput')).underline()"><u>U</u></button>
+		<button id="strike" type="button" onclick="new formatSelection(document.getElementById('textinput')).strike()"><s>S</s></button>
+		<button id="red" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('red')"><span style="color:red">A</span></button>
+		<button id="yellow" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('yellow')"><span style="color:yellow">A</span></button>
+		<button id="green" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('green')"><span style="color:green">A</span></button>
+		<button id="blue" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('blue')"><span style="color:blue">A</span></button>
+		<button id="customColor" type="button" onclick="new formatSelection(document.getElementById('textinput')).color(document.getElementById('colorPicker').value)">custom</button>
+		<input id="colorPicker" type="color">
+		<br><br>
+
+		<input id="silence" type="checkbox" value="silence">
+		<label for="silence">Silence notification</label>
+
+		<hr>
+
+		<input type="button" onclick="showhide('settings')" value="Settings">
+		<input type="button" onclick="showhide('advanced')" value="Advanced">
+	</div>
+
+        		<!--MESSAGE INPUT DIV-->
+	<div id="messageInputDiv">
+		<form id="messageInput"
+			onsubmit="let msg = new BlobMessage();
+			msg.message = document.getElementById('textinput').value;
+			msg.name = document.getElementById('username').value;
+			msg.silence = document.getElementById('silence').checked;
+			msg.send()
+			return false">
+			<textarea id="textinput" placeholder="type message" value="" rows="1"></textarea>
+			<input id="sendMessage" type="submit" value="Send">
+		</form>
+		<br>
+	</div>
+  
+	
+</body>
+
+</html>

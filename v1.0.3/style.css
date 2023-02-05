@@ -1,0 +1,169 @@
+body {
+	font-size: 16;
+}
+
+input {
+	font-size: 16px;
+	font-family: Georgia, serif;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+}
+
+textarea {
+	font-size: 16px;
+	font-family: Georgia, serif;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+}
+
+button {
+	font-family: Georgia, serif;
+	font-size: 16px;
+	border-style: solid;
+	border-radius: 3px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input:focus {
+	font-size: 16px;
+}
+
+/* if mobile device max width 480px */
+@media only screen and (max-device-width: 480px) {
+	.mobile {
+		display: block;
+	}
+
+	.desktop {
+		display: none;
+	}
+}
+
+.message {
+	font-family: inherit;
+	padding: 5px;
+}
+
+.msgColor0 {
+	box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .2);
+}
+
+.msgColor1 {
+	box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, .1);
+}
+
+.copyButton {
+	float: right;
+}
+
+#settings {
+	padding: 10px;
+	background-color: inherit;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+  z-index: 1;
+
+	display: none;
+	width: 90vw;
+	height: 90vh;
+}
+
+#advanced {
+	padding: 10px;
+	background-color: inherit;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+  z-index: 1;
+
+	display: none;
+	width: 90vw;
+	height: 90vh;
+}
+
+#messagesScroll * {
+	font-family: inherit;
+	overflow-anchor: none;
+}
+
+#messagesParent {
+	font-family: inherit;
+	max-height: 80vh;
+	max-width: 80vw;
+	min-width: 50vw;
+  min-height: 50vh;
+	overflow-y: auto;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+#messagesParent::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	background-color: transparent;
+}
+
+#messagesParent::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+}
+
+#scrollAnchor {
+	overflow-anchor: auto;
+	height: 2px;
+}
+
+#messageInputDiv {
+  height: 20vh;
+  max-height: 20vh;
+	width: calc(100vw - 40px);
+	padding: 10px;
+
+	vertical-align: bottom;
+}
+
+#leftBox {
+	padding: 10px;
+	min-width: 70vw;
+	position: relative;
+}
+
+#rightBox {
+	padding: 10px;
+}
+
+#textinput {
+	width: calc(100% - 20px);
+	display: block;
+	margin-top: 10px;
+	overflow: hidden;
+	resize: both;
+	padding: 10px;
+
+}
+
+#textinput[contenteditable]:empty::before {
+	content: "new message";
+	color: gray;
+}
+
+#sendMessage {
+	width: 100%;
+	margin-top: 10px
+}
+
+.warning {
+	color: yellow;
+}
