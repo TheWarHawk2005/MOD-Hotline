@@ -4,64 +4,39 @@ themes.jungle = ['483838', '42855B', '90B77D', 'D2D79F']
 themes.laetare = ['1F1D36', '3F3351', '864879', 'E9A6A6']
 themes.brimstone = ['211717', 'A34A28', 'F58B54', 'DFDDC7']
 
+const paintElements = function (selectors, rules) {
+	for (i = 0; i < selectors.length; i++) {
+		let element = document.querySelectorAll(selectors[i])
+		let ruleKeys = Object.keys(rules)
+		for (r = 0; r < ruleKeys.length; r++) {
+			element.forEach(element => {
+				element.style[ruleKeys[r]] = rules[ruleKeys[r]]
+			})
+		}
+	}
+}
+
 const applyTheme = function (theme) {
 	if (!JSON.stringify(themes).includes(theme)) { //ensure valid theme and cookies
 		theme = 'dark'
 		setCookie('theme', 'dark', 3650)
 	}
-	console.log(themes[theme])
-	var all = document.querySelectorAll('body')
-	all.forEach(all => {
-		all.style.backgroundColor = '#' + themes[theme][0]
-		all.style.borderColor = '#' + themes[theme][1]
-		all.style.color = '#' + themes[theme][3]
-		ruleForScroll.selectorText = '#messagesParent::-webkit-scrollbar-thumb'
-		ruleForScroll.style["background"] = '#' + themes[theme][1]
-	})
-	var secondary = document.querySelectorAll('.popup')
-	secondary.forEach(secondary => {
-		secondary.style.backgroundColor = '#' + themes[theme][1]
-	})
-	var inputs = document.querySelectorAll('input')
-	inputs.forEach(inputs => {
-		inputs.style.backgroundColor = '#' + themes[theme][0]
-		inputs.style.borderColor = '#' + themes[theme][2]
-		inputs.style.color = '#' + themes[theme][3]
-	})
-	var buttons = document.querySelectorAll('button')
-	buttons.forEach(buttons => {
-		buttons.style.backgroundColor = '#' + themes[theme][0]
-		buttons.style.borderColor = '#' + themes[theme][2]
-		buttons.style.color = '#' + themes[theme][3]
-	})
-	var dropdowns = document.querySelectorAll('select')
-	dropdowns.forEach(dropdowns => {
-		dropdowns.style.backgroundColor = '#' + themes[theme][1]
-		dropdowns.style.color = '#' + themes[theme][3]
-	})
-	var links = document.querySelectorAll('a')
-	links.forEach(links => {
-		links.style.color = '#' + themes[theme][2]
-	})
+	ruleForScroll.selectorText = '#messagesParent::-webkit-scrollbar-thumb' // style CSS directly
+	ruleForScroll.style["background"] = '#' + themes[theme][1]
+
+	paintElements(['body', 'input', 'button', 'select'],{'color': `#${themes[theme][3]}`,'backgroundColor': `#${themes[theme][0]}`,}) //apply default background
+	paintElements(['body', 'input', 'button'], {'borderColor': `#${themes[theme][2]}`}) // apply borders
+	paintElements(['a'], {'color': `#${themes[theme][2]}`}) // apply highlighted color
+	paintElements(['select','#textinput', '.popup'], {'backgroundColor': `#${themes[theme][1]}` }) // apply secondary background
+
 	styleMessageElements(theme)
+
+	console.log('Applied theme: '+theme)
 }
 
-const styleMessageElements = function (theme) {
-	var systemMessages = document.querySelector('#messages').querySelectorAll('.msgTypesystem')
-	systemMessages.forEach(systemMessages => {
-		systemMessages.style.backgroundColor = '#' + themes[theme][1]
-		systemMessages.style.color = '#' + themes[theme][2]
-	})
-	var inputs = document.querySelector('#messages').querySelectorAll('input')
-	inputs.forEach(inputs => {
-		inputs.style.backgroundColor = '#' + themes[theme][0]
-		inputs.style.borderColor = '#' + themes[theme][2]
-		inputs.style.color = '#' + themes[theme][3]
-	})
-	var links = document.querySelector('#messages').querySelectorAll('a')
-	links.forEach(links => {
-		links.style.color = '#' + themes[theme][2]
-	})
+const styleMessageElements = function (theme) { // apply every message refresh
+	paintElements(['.msgTypesystem'], {'backgroundColor': `#${themes[theme][1]}`,'color':`#${themes[theme][2]}`})
+	paintElements(['a'], {'color': `#${themes[theme][2]}`}) // apply highlighted color
 }
 
 // EXTRA DYNAMIC CSS
