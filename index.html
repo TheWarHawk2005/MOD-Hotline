@@ -9,8 +9,9 @@
 
 	<script src="cookies.js"></script>
 	<script src="http.js"></script>
-	<script src="index.js"></script>
 	<script src="colors.js"></script>
+	<script src="index.js"></script>
+	
 
 </head>
 
@@ -65,6 +66,7 @@
 			<option value="https://mod-hotline-testbuild.glitch.me">[BETA] Test Build: unstable beta</option>
 		</optgroup>
 		<optgroup label="Old Versions (may have bugs/limited functionality">
+			<option value="https://mod-hotline.vercel.app/v1.0.2">MOD Hotline v1.0.2</option>
 			<option value="https://mod-hotline.vercel.app/v1.0.1">MOD Hotline v1.0.1</option>
 			<option value="https://mod-hotline.vercel.app/v1.0.0">MOD Hotline v1.0.0: initial release</option>
 		</optgroup>
@@ -74,7 +76,7 @@
 
 		<input type="button" onclick="downloadBackup()" value="Download Messages"><br><br>
 
-		<input id="closeVersion" type="button" onclick="showhide('advanced')" value="Close">
+		<input id="closeAdvanced" type="button" onclick="showhide('advanced')" value="Close">
 	</div>
 
 
@@ -86,24 +88,17 @@
 				</div>
 				<div id="scrollAnchor"></div>
 			</div>
-		</div>
-
-		<div id="messageInputDiv">
-			<form id="messageInput"
-				onsubmit="let msg = new BlobMessage();
-				msg.message = document.getElementById('textinput').value;
-				msg.name = document.getElementById('username').value;
-				msg.silence = document.getElementById('silence').checked;
-				msg.send()
-				return false">
-				<input id="textinput" placeholder="new message" value="">
-				<input id="sendMessage" type="submit" value="Send">
-			</form>
-			<br>
-		</div>
+    </div>
+    
 	</div>
 
 	<div id="rightBox" style="float:left">
+		<div id="settingsPreview" class="desktop">
+			<input id="usernamePreview" placeholder="Name" value="" onchange="setCookie('username', this.value, 3650);document.getElementById('username').value=this.value">
+			<p id="version" class="versionDisplay"></p>
+
+		</div>
+    <div id="presetCodes" class="desktop">
 		<select id="chessCodes">
 			<option value="pushed a pawn">♟ pushed a pawn</option>
 			<option value="promoted a pawn">♟ promoted a pawn</option>
@@ -122,12 +117,13 @@
 		</select>
 		<input type="button" value="Append Bean Code" onclick="appendCode(document.getElementById('beanCodes').value)">
 		<br><br>
+    </div>
 
 		<!--requires <BUTTON> elements for easier formatting-->
 		<button id="bold" type="button" onclick="new formatSelection(document.getElementById('textinput')).bold()"><b>B</b></button>
 		<button id="italicize" type="button" onclick="new formatSelection(document.getElementById('textinput')).italicize()"><i>I</i></button>
-		<button id="underline" type="button" onclick="new formatSelection(document.getElementById('textinput')).underline()"><ins>U</ins></button>
-		<button id="strike" type="button" onclick="new formatSelection(document.getElementById('textinput')).strike()"><del>S</del></button>
+		<button id="underline" type="button" onclick="new formatSelection(document.getElementById('textinput')).underline()"><u>U</u></button>
+		<button id="strike" type="button" onclick="new formatSelection(document.getElementById('textinput')).strike()"><s>S</s></button>
 		<button id="red" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('red')"><span style="color:red">A</span></button>
 		<button id="yellow" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('yellow')"><span style="color:yellow">A</span></button>
 		<button id="green" type="button" onclick="new formatSelection(document.getElementById('textinput')).color('green')"><span style="color:green">A</span></button>
@@ -143,9 +139,24 @@
 
 		<input type="button" onclick="showhide('settings')" value="Settings">
 		<input type="button" onclick="showhide('advanced')" value="Advanced">
-		<span id="version" class="versionDisplay"></span>
 	</div>
 
+        		<!--MESSAGE INPUT DIV-->
+	<div id="messageInputDiv">
+		<form id="messageInput"
+			onsubmit="let msg = new BlobMessage();
+			msg.message = document.getElementById('textinput').value;
+			msg.name = document.getElementById('username').value;
+			msg.silence = document.getElementById('silence').checked;
+			msg.send()
+			return false">
+			<textarea id="textinput" placeholder="type message" value="" rows="1"></textarea>
+			<input id="sendMessage" type="submit" value="Send">
+		</form>
+		<br>
+	</div>
+  
+	
 </body>
 
 </html>
