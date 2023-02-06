@@ -105,6 +105,7 @@ input:focus {
 	min-width: 50vw;
   min-height: 50vh;
 	overflow-y: auto;
+  overflow-x: hidden;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 5px;
@@ -126,21 +127,26 @@ input:focus {
 }
 
 #messageInputDiv {
-  height: 20vh;
-  max-height: 20vh;
-	width: calc(100vw - 40px);
+  position: relative;
+  bottom: 0px;
+  
+  height: 10vh;
+	width: calc(100% - 40px);
 	padding: 10px;
+}
 
-	vertical-align: bottom;
+#main {
+  display: flex;
 }
 
 #leftBox {
 	padding: 10px;
-	min-width: 70vw;
-	position: relative;
+  width: 70vw;
+  float: left;
 }
 
 #rightBox {
+  flex-grow: 1;
 	padding: 10px;
 }
 
@@ -149,9 +155,10 @@ input:focus {
 	display: block;
 	margin-top: 10px;
 	overflow: hidden;
-	resize: both;
+	resize: none;
 	padding: 10px;
-
+  position: absolute;
+  bottom: 50%;
 }
 
 #textinput[contenteditable]:empty::before {
@@ -160,8 +167,11 @@ input:focus {
 }
 
 #sendMessage {
+  height: 50%;
 	width: 100%;
-	margin-top: 10px
+	margin-top: 10px;
+  position: absolute;
+  bottom: 0%;
 }
 
 .warning {
