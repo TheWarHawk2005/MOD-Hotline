@@ -66,7 +66,6 @@
 			<option value="https://mod-hotline-testbuild.glitch.me">[BETA] Test Build: unstable beta</option>
 		</optgroup>
 		<optgroup label="Old Versions (may have bugs/limited functionality">
-			<option value="https://mod-hotline.vercel.app/v1.0.2">MOD Hotline v1.0.2</option>
 			<option value="https://mod-hotline.vercel.app/v1.0.1">MOD Hotline v1.0.1</option>
 			<option value="https://mod-hotline.vercel.app/v1.0.0">MOD Hotline v1.0.0: initial release</option>
 		</optgroup>
@@ -80,8 +79,9 @@
 	</div>
 
 
-
-	<div id="leftBox" style="float:left">
+<div id="main">
+  
+	<div id="leftBox">
 		<div id="messagesParent">
 			<div id="messagesScroll">
 				<div id="messages">
@@ -92,7 +92,7 @@
     
 	</div>
 
-	<div id="rightBox" style="float:left">
+	<div id="rightBox">
 		<div id="settingsPreview" class="desktop">
 			<input id="usernamePreview" placeholder="Name" value="" onchange="setCookie('username', this.value, 3650);document.getElementById('username').value=this.value">
 			<p id="version" class="versionDisplay"></p>
@@ -132,7 +132,7 @@
 		<input id="colorPicker" type="color">
 		<br><br>
 
-		<input id="silence" type="checkbox" value="silence">
+		<input id="silence" type="checkbox" value="silence" class="desktop">
 		<label for="silence">Silence notification</label>
 
 		<hr>
@@ -140,6 +140,8 @@
 		<input type="button" onclick="showhide('settings')" value="Settings">
 		<input type="button" onclick="showhide('advanced')" value="Advanced">
 	</div>
+    </div>
+
 
         		<!--MESSAGE INPUT DIV-->
 	<div id="messageInputDiv">
@@ -150,11 +152,12 @@
 			msg.silence = document.getElementById('silence').checked;
 			msg.send()
 			return false">
-			<textarea id="textinput" placeholder="type message" value="" rows="1"></textarea>
+			<span id="textinput" contenteditable="true" placeholder="type message" value="" rows="1" role="textbox"></span>
 			<input id="sendMessage" type="submit" value="Send">
 		</form>
 		<br>
 	</div>
+
   
 	
 </body>
