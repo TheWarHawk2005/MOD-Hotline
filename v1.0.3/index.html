@@ -2,15 +2,15 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="./style.css">
 
 	<title>MOD Hotline</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<script src="cookies.js"></script>
-	<script src="http.js"></script>
-	<script src="colors.js"></script>
-	<script src="index.js"></script>
+	<script src="./cookies.js"></script>
+	<script src="./http.js"></script>
+	<script src="./colors.js"></script>
+	<script src="./index.js"></script>
 	
 
 </head>
@@ -80,8 +80,9 @@
 	</div>
 
 
-
-	<div id="leftBox" style="float:left">
+<div id="main">
+  
+	<div id="leftBox">
 		<div id="messagesParent">
 			<div id="messagesScroll">
 				<div id="messages">
@@ -92,7 +93,7 @@
     
 	</div>
 
-	<div id="rightBox" style="float:left">
+	<div id="rightBox">
 		<div id="settingsPreview" class="desktop">
 			<input id="usernamePreview" placeholder="Name" value="" onchange="setCookie('username', this.value, 3650);document.getElementById('username').value=this.value">
 			<p id="version" class="versionDisplay"></p>
@@ -132,7 +133,7 @@
 		<input id="colorPicker" type="color">
 		<br><br>
 
-		<input id="silence" type="checkbox" value="silence">
+		<input id="silence" type="checkbox" value="silence" class="desktop">
 		<label for="silence">Silence notification</label>
 
 		<hr>
@@ -140,21 +141,24 @@
 		<input type="button" onclick="showhide('settings')" value="Settings">
 		<input type="button" onclick="showhide('advanced')" value="Advanced">
 	</div>
+    </div>
+
 
         		<!--MESSAGE INPUT DIV-->
 	<div id="messageInputDiv">
 		<form id="messageInput"
 			onsubmit="let msg = new BlobMessage();
-			msg.message = document.getElementById('textinput').value;
+			msg.message = document.getElementById('textinput').textContent;
 			msg.name = document.getElementById('username').value;
 			msg.silence = document.getElementById('silence').checked;
 			msg.send()
 			return false">
-			<textarea id="textinput" placeholder="type message" value="" rows="1"></textarea>
+			<span id="textinput" contenteditable="true" placeholder="type message" value="" rows="1" role="textbox"></span>
 			<input id="sendMessage" type="submit" value="Send">
 		</form>
 		<br>
 	</div>
+
   
 	
 </body>
