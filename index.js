@@ -2,7 +2,7 @@
 // ============== //
 const storageMax = 50
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-const version = '1.0.3'
+const version = '1.0.4'
 const checkInterval = 1000 // ms between each blob ping
 var blobID
 
@@ -113,7 +113,7 @@ function BlobMessage(message, name, date) {
 				history.encryptedMessages.push(pushData)
 				if (history.encryptedMessages.length >= storageMax + 1) { history.encryptedMessages.shift() } // remove previous messages if cap is reached
 				writeBlob(history)
-				document.getElementById("textinput").value = '' // clear message input
+				document.getElementById("textinput").innerHTML = '' // clear message input
 			}
 		})
 	}
