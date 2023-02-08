@@ -148,7 +148,7 @@
 	<div id="messageInputDiv">
 		<form id="messageInput"
 			onsubmit="let msg = new BlobMessage();
-			msg.message = document.getElementById('textinput').value;
+			msg.message = document.getElementById('textinput').textContent;
 			msg.name = document.getElementById('username').value;
 			msg.silence = document.getElementById('silence').checked;
 			msg.send()
